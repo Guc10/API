@@ -1,6 +1,8 @@
 using FirstAPI.Models;
+using FirstAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
 namespace FirstAPI.Controllers;
 
@@ -9,70 +11,61 @@ namespace FirstAPI.Controllers;
 
 public class UsersController : Controller
 {
-    static private List<User> _users = new List<User>
+    private readonly UserService _userService;
+
+    public UsersController(UserService userService)
     {
-        new User
-        {
-            Id = 1,
-            Username = "admin",
-            Password = "admin",
-            Age = 13
-        },
-        new User
-        {
-            Id = 2,
-            Username = "nonAdmin",
-            Password = "admin",
-            Age = 25
-        }
-    };
+        _userService = userService;
+    }
 
     [HttpGet]
-    public ActionResult<List<User>> GetUsers()
+    public async Task<ActionResult<List<User>>> GetUsers()
     {
-        return Ok(_users);
+        var users = await _userService.GetAsync();
+        return Ok(users);
     }
 
     [HttpGet("{id}")]
-    public ActionResult<User> GetUser(int id)
+    public async Task<ActionResult<User>> GetUser(string id)
     {
-        var user = _users.FirstOrDefault(x => x.Id == id);
+        var user = await _userService.GetAsync(id);
         if (user == null)
             return NotFound();
         return Ok(user);
     }
 
     [HttpPost]
-    public ActionResult<User> AddUser(User user)
+    public async Task<ActionResult<User>> AddUser(User user)
     {
-        if(user == null)
-            return BadRequest();
-        _users.Add(user);
-        return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+        var users = await _userService.GetAsync();
+        if (users.Count == 0)
+        {
+            if(user == null)
+                return BadRequest();
+            await _userService.CreateAsync(user);
+            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+        }
+        return BadRequest();
     }
 
     [HttpPut("{id}")]
-    public IActionResult UpdateUser(int id, User updatedUser)
+    public async Task<IActionResult> UpdateUser(string id, User updatedUser)
     {
-        var user = _users.FirstOrDefault(x => x.Id == id);
+        var user = await _userService.GetAsync(id);
         if (user == null)
             return NotFound();
-        
-        user.Id = updatedUser.Id;
-        user.Username = updatedUser.Username;
-        user.Password = updatedUser.Password;
-        user.Age = updatedUser.Age;
-
+        updatedUser.Id = id;
+        await _userService.UpdateAsync(id, updatedUser);
         return NoContent();
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteUser(int id)
+    public async Task<IActionResult> DeleteUser(string id)
     {
-        var user = _users.FirstOrDefault(x => x.Id == id);
+        var user = await _userService.GetAsync(id);
         if (user == null)
             return NotFound();
-        _users.Remove(user);
+        await _userService.RemoveAsync(id);
         return NoContent();
     }
 }
