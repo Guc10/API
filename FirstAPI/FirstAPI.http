@@ -31,3 +31,7 @@ Content-Type: application/json
   "password": "admin",
   "age": 8
 }
+
+###
+
+DELETE {{URL}}/api/Users/3

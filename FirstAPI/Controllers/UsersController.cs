@@ -65,4 +65,14 @@ public class UsersController : Controller
 
         return NoContent();
     }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteUser(int id)
+    {
+        var user = _users.FirstOrDefault(x => x.Id == id);
+        if (user == null)
+            return NotFound();
+        _users.Remove(user);
+        return NoContent();
+    }
 }
