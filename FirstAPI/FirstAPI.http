@@ -1,0 +1,33 @@
+@URL =  http://localhost:5167
+
+GET {{URL}}/api/Users
+Accept: application/json
+
+###
+
+GET {{URL}}/api/Users/1
+Accept: application/json
+
+###
+
+POST {{URL}}/api/Users
+Content-Type: application/json
+
+{
+"id": 3,
+"username": "bot",
+"password": "admin",
+"age": 69
+}
+
+###
+
+PUT {{URL}}/api/Users/2
+Content-Type: application/json
+
+{
+  "id": 2,
+  "username": "bot",
+  "password": "admin",
+  "age": 8
+}
