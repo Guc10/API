@@ -5,7 +5,7 @@ Accept: application/json
 
 ###
 
-GET {{URL}}/api/Users/1
+GET {{URL}}/api/Users/PUT_ID_HERE
 Accept: application/json
 
 ###
@@ -14,24 +14,23 @@ POST {{URL}}/api/Users
 Content-Type: application/json
 
 {
-"id": 3,
-"username": "bot",
-"password": "admin",
-"age": 69
+  "user": {
+    "name": "bot",
+    "age": 69 
+  }
 }
 
 ###
 
-PUT {{URL}}/api/Users/2
+PUT {{URL}}/api/Users/PUT_ID_HERE
 Content-Type: application/json
 
 {
-  "id": 2,
-  "username": "bot",
-  "password": "admin",
-  "age": 8
+  "id": "PUT_ID_HERE",
+  "name": "sigmaBot",
+  "age": 69
 }
 
 ###
 
-DELETE {{URL}}/api/Users/3
+DELETE {{URL}}/api/Users/PUT_ID_HERE

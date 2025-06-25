@@ -1,0 +1,24 @@
+﻿services:
+  firstapi:
+    image: firstapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO__CONNECTIONSTRING=mongodb://mongodb:27017
+    ports:
+      - "127.0.0.1:5167:8080"
+      - "127.0.0.1:7237:8081"
+
+  mongodb:
+    image: mongo:7
+    container_name: mongodb
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
