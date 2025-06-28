@@ -5,7 +5,7 @@ Accept: application/json
 
 ###
 
-GET {{URL}}/api/Users/PUT_ID_HERE
+GET {{URL}}/api/Users/685fe3cfe3339fd5b405a83e
 Accept: application/json
 
 ###
@@ -14,23 +14,20 @@ POST {{URL}}/api/Users
 Content-Type: application/json
 
 {
-  "user": {
-    "name": "bot",
-    "age": 69 
-  }
+    "name": "sigma",
+    "age": 34
 }
 
 ###
 
-PUT {{URL}}/api/Users/PUT_ID_HERE
+PUT {{URL}}/api/Users/685fe3cfe3339fd5b405a83e
 Content-Type: application/json
 
 {
-  "id": "PUT_ID_HERE",
   "name": "sigmaBot",
-  "age": 69
+  "age": 78
 }
 
 ###
 
-DELETE {{URL}}/api/Users/PUT_ID_HERE
+DELETE {{URL}}/api/Users/685fec196a7544e0f5e0b4ef

@@ -1,8 +1,6 @@
 using FirstAPI.Models;
 using FirstAPI.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 
 namespace FirstAPI.Controllers;
 
@@ -38,22 +36,14 @@ public class UsersController : Controller
     public async Task<ActionResult<User>> AddUser(User user)
     {
         var users = await _userService.GetAsync();
-        if (users.Count == 0)
-        {
-            if(user == null)
-                return BadRequest();
-            await _userService.CreateAsync(user);
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
-        }
-        return BadRequest();
+        await _userService.CreateAsync(user);
+        return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUser(string id, User updatedUser)
     {
         var user = await _userService.GetAsync(id);
-        if (user == null)
-            return NotFound();
         updatedUser.Id = id;
         await _userService.UpdateAsync(id, updatedUser);
         return NoContent();
