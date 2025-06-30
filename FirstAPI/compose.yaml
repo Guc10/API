@@ -1,6 +1,7 @@
 ﻿services:
   firstapi:
     image: firstapi
+    restart: unless-stopped
     build:
       context: .
       dockerfile: Dockerfile
@@ -14,6 +15,7 @@
 
   mongodb:
     image: mongo:7
+    restart: unless-stopped
     container_name: mongodb
     ports:
       - "127.0.0.1:27017:27017"
