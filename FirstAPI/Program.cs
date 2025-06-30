@@ -8,7 +8,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("https://tester-online.site/")
+        policy.WithOrigins("https://tester-online.site")
             .WithHeaders("content-type", "X-API-KEY", "Accept")
             .WithMethods("POST", "GET", "PUT", "DELETE");
     });
@@ -23,6 +23,8 @@ if (app.Environment.IsDevelopment())
 
 DotNetEnv.Env.Load();
 
+app.UseCors();
+
 app.Use(async (context, next) =>
 {
     var apiKey = context.Request.Headers["X-API-KEY"];
@@ -34,8 +36,6 @@ app.Use(async (context, next) =>
     }
     await next();
 });
-
-app.UseCors();
 
 app.UseAuthorization();
 
