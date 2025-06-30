@@ -1,30 +1,31 @@
 @URL =  http://localhost:5167
+@KEY = ...
 
 GET {{URL}}/api/Users
-X-API-KEY: sigmaSkibidiKey
+X-API-KEY: {{KEY}}
 Accept: application/json
 
 ###
 
 GET {{URL}}/api/Users/6861971ca650203b7c881e90
-X-API-KEY: sigmaSkibidiKey
+X-API-KEY: {{KEY}}
 Accept: application/json
 
 ###
 
 POST {{URL}}/api/Users
-X-API-KEY: sigmaSkibidiKey
+X-API-KEY: {{KEY}}
 Content-Type: application/json
 
 {
-    "name": "Krzychuj",
+    "name": "Adam",
     "age": 5
 }
 
 ###
 
 PUT {{URL}}/api/Users/686293714353758f4ae0a99a
-X-API-KEY: sigmaSkibidiKey
+X-API-KEY: {{KEY}}
 Content-Type: application/json
 
 {
@@ -35,4 +36,4 @@ Content-Type: application/json
 ###
 
 DELETE {{URL}}/api/Users/685fe3cfe3339fd5b405a83e
-X-API-KEY: sigmaSkibidiKey
+X-API-KEY: {{KEY}}
