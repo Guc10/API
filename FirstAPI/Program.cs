@@ -8,7 +8,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("https://tester-online.site")
+        policy.WithOrigins("https://tester-online.site", "http://localhost:5173")
             .WithHeaders("content-type", "X-API-KEY", "Accept")
             .WithMethods("POST", "GET", "PUT", "DELETE")
             .AllowCredentials();

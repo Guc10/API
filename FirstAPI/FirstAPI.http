@@ -19,7 +19,7 @@ Content-Type: application/json
 
 {
     "name": "Adam",
-    "age": 5
+    "password": "abc"
 }
 
 ###
@@ -30,7 +30,7 @@ Content-Type: application/json
 
 {
   "name": "Krzychu",
-  "age": 6
+  "password": "abc"
 }
 
 ###

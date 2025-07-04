@@ -11,7 +11,7 @@ namespace FirstAPI.Services
         {
             var mongoClient = new MongoClient(configuration["MongoDbSettings:ConnectionString"]);
             var mongoDatabase = mongoClient.GetDatabase(configuration["MongoDbSettings:DatabaseName"]);
-            _users = mongoDatabase.GetCollection<User>("Users");
+            _users = mongoDatabase.GetCollection<User>("UsersCredentials");
         }
 
         public async Task<List<User>> GetAsync() =>
